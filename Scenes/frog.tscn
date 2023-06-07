@@ -1,0 +1,165 @@
+[gd_scene load_steps=23 format=3 uid="uid://cn2l18ies7qxq"]
+
+[ext_resource type="Texture2D" uid="uid://baxctpfukdymd" path="res://Assets/Sprites/frog-Sheet.png" id="1_bch4g"]
+[ext_resource type="Script" path="res://Scripts/frog.gd" id="1_iaxpq"]
+[ext_resource type="AudioStream" uid="uid://dw430m6l1u3sr" path="res://Assets/Sounds/Frog (Croaking) - Sound Effect - ProSounds.wav" id="4_ds1gm"]
+[ext_resource type="AudioStream" uid="uid://cykyc3u5p5bom" path="res://Assets/Sounds/Coin 1.wav" id="4_kfys8"]
+[ext_resource type="AudioStream" uid="uid://bt76y2ati0gfp" path="res://Assets/Sounds/Enemy 2.wav" id="5_wi08x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy6j2"]
+
+[sub_resource type="Animation" id="Animation_kgue5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tm46a"]
+resource_name = "idle_0"
+length = 2.4
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 8, 9, 10, 8, 9, 10, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_gd0es"]
+resource_name = "idle_1"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_v3k4q"]
+resource_name = "jump"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0p45v"]
+_data = {
+"RESET": SubResource("Animation_kgue5"),
+"idle_0": SubResource("Animation_tm46a"),
+"idle_1": SubResource("Animation_gd0es"),
+"jump": SubResource("Animation_v3k4q")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_45mlp"]
+animation = &"idle_0"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0nr8t"]
+animation = &"idle_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_01gft"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d8osf"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6w2kh"]
+priority = 0
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f4mih"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hajd0"]
+priority = 0
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gubpq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dy6tw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gwfva"]
+states/Start/position = Vector2(200, 98.4691)
+states/idle_0/node = SubResource("AnimationNodeAnimation_45mlp")
+states/idle_0/position = Vector2(467.347, 99.7558)
+states/idle_1/node = SubResource("AnimationNodeAnimation_0nr8t")
+states/idle_1/position = Vector2(467.951, 220.074)
+states/jump/node = SubResource("AnimationNodeAnimation_01gft")
+states/jump/position = Vector2(721.333, 99.7723)
+transitions = ["Start", "idle_0", SubResource("AnimationNodeStateMachineTransition_d8osf"), "idle_0", "idle_1", SubResource("AnimationNodeStateMachineTransition_6w2kh"), "jump", "idle_0", SubResource("AnimationNodeStateMachineTransition_f4mih"), "idle_1", "idle_0", SubResource("AnimationNodeStateMachineTransition_hajd0"), "idle_0", "jump", SubResource("AnimationNodeStateMachineTransition_gubpq"), "idle_1", "jump", SubResource("AnimationNodeStateMachineTransition_dy6tw")]
+graph_offset = Vector2(-56.7317, 50.349)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_r8mwb"]
+
+[node name="Frog" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_iaxpq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -9)
+texture = ExtResource("1_bch4g")
+hframes = 8
+vframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jy6j2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_0p45v")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_gwfva")
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_r8mwb")
+
+[node name="FrogSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ds1gm")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_kfys8")
+
+[node name="StopSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_wi08x")
+
+[connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]

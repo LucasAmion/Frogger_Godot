@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dw430m6l1u3sr"
+path="res://.godot/imported/Frog (Croaking) - Sound Effect - ProSounds.wav-3a0c19b2e1297ee84eb6fe2532e8563e.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Frog (Croaking) - Sound Effect - ProSounds.wav"
+dest_files=["res://.godot/imported/Frog (Croaking) - Sound Effect - ProSounds.wav-3a0c19b2e1297ee84eb6fe2532e8563e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

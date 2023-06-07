@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://d21v637wmk3ti"]
+
+[ext_resource type="PackedScene" uid="uid://bf1vwkfmun7ns" path="res://Scenes/car.tscn" id="1_4rik1"]
+
+[node name="CarLine" type="Node2D"]
+
+[node name="Car1" parent="." instance=ExtResource("1_4rik1")]
+position = Vector2(-26, 0)
+
+[node name="Car2" parent="." instance=ExtResource("1_4rik1")]
+position = Vector2(145, 0)
+
+[node name="Car3" parent="." instance=ExtResource("1_4rik1")]
+position = Vector2(316, 0)
+
+[node name="Car4" parent="." instance=ExtResource("1_4rik1")]
+position = Vector2(486, 0)

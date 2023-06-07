@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bgv0k8ttrocup"
+path="res://.godot/imported/Keep It Casual.wav-d31fc259869eed4484f91dd047f1ce6a.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Keep It Casual.wav"
+dest_files=["res://.godot/imported/Keep It Casual.wav-d31fc259869eed4484f91dd047f1ce6a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
