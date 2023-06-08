@@ -147,3 +147,4 @@ region_rect = Rect2(49.7185, 2.47355, 11.9696, 10.8815)
 
 [node name="FocusSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_pc7y0")
+bus = &"Chorus"

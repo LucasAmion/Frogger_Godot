@@ -82,3 +82,10 @@ func _on_splash_sound_finished():
 func _on_success_sound_finished():
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+
+func death_animation():
+	var tween = create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(sprite_2d, "rotation", -2.0, 0.5)
+	tween.parallel()
+	tween.tween_property(sprite_2d, "scale", Vector2.ZERO, 0.5).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)

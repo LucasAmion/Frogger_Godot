@@ -166,6 +166,7 @@ stream = ExtResource("4_kfys8")
 
 [node name="RestrictSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_wi08x")
+bus = &"Chorus"
 
 [node name="SplashSound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -174,6 +175,7 @@ stream = ExtResource("6_a7jn3")
 [node name="SuccessSound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("7_0jb02")
+bus = &"Chorus"
 
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
 [connection signal="finished" from="SplashSound" to="." method="_on_splash_sound_finished"]

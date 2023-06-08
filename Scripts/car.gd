@@ -7,6 +7,8 @@ extends Area2D
 @onready var hit_sound = $HitSound
 @onready var game_over_sound = $GameOverSound
 
+@onready var frog = get_node("/root/Main/Frog")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -18,8 +20,9 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	music.stop()
-	get_tree().paused = true
 	hit_sound.play()
+	frog.death_animation()
+	get_tree().paused = true
 
 func _on_hit_sound_finished():
 	game_over_sound.play()
