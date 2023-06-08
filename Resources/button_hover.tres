@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bq4wyvpt08m31"]
+
+[ext_resource type="Texture2D" uid="uid://rgylrhergegn" path="res://Assets/RetroWindowsGUI/Windows_Button_Focus.png" id="1_1a7ll"]
+
+[resource]
+texture = ExtResource("1_1a7ll")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+modulate_color = Color(0.384314, 0.384314, 0.384314, 1)

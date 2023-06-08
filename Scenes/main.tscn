@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ix67r1np6"]
+[gd_scene load_steps=8 format=3 uid="uid://b8ix67r1np6"]
 
 [ext_resource type="PackedScene" uid="uid://cn2l18ies7qxq" path="res://Scenes/frog.tscn" id="1_anj3j"]
 [ext_resource type="TileSet" uid="uid://bfgwe34lyr7g3" path="res://Resources/city_tile_set.tres" id="1_ehuv1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b6loixbopa1i6" path="res://Scenes/car_line_2.tscn" id="2_r22kk"]
 [ext_resource type="Script" path="res://Scripts/car_fast.gd" id="3_l5i7f"]
 [ext_resource type="AudioStream" uid="uid://bgv0k8ttrocup" path="res://Assets/Sounds/Keep It Casual.wav" id="4_7cxmq"]
+[ext_resource type="PackedScene" uid="uid://benimij3t5ke8" path="res://Scenes/pause_menu.tscn" id="7_r6jvf"]
 
 [node name="Main" type="Node2D"]
 metadata/_edit_vertical_guides_ = []
@@ -68,7 +69,17 @@ rotation = 3.14159
 position = Vector2(315, 615)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("4_7cxmq")
 autoplay = true
+
+[node name="SubViewportContainer" parent="." instance=ExtResource("7_r6jvf")]
+process_mode = 3
+visible = false
+z_index = 2
+offset_left = 197.0
+offset_top = 185.0
+offset_right = 422.0
+offset_bottom = 500.0
 
 [editable path="CarLine1"]
