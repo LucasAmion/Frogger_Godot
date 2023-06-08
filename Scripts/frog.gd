@@ -25,7 +25,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if Input.is_action_just_pressed("ui_left") and not moving:
+	if Input.is_action_just_pressed("left") and not moving:
 		sprite_2d.scale = Vector2(1, 1)
 		destination = position + jump_distance*Vector2.LEFT
 		if destination.x > 0:
@@ -35,7 +35,7 @@ func _physics_process(delta):
 		else:
 			restrict_sound.play()
 	
-	if Input.is_action_just_pressed("ui_right") and not moving:
+	if Input.is_action_just_pressed("right") and not moving:
 		sprite_2d.scale = Vector2(-1, 1)
 		destination = position + jump_distance*Vector2.RIGHT
 		if destination.x < screen_size.x:
@@ -45,7 +45,7 @@ func _physics_process(delta):
 		else:
 			restrict_sound.play()
 	
-	if Input.is_action_just_pressed("ui_up") and not moving:
+	if Input.is_action_just_pressed("up") and not moving:
 		destination = position + jump_distance*Vector2.UP
 		if destination.y > -30:
 			jump_sound.play()
@@ -54,7 +54,7 @@ func _physics_process(delta):
 		else:
 			restrict_sound.play()
 	
-	if Input.is_action_just_pressed("ui_down") and not moving:
+	if Input.is_action_just_pressed("down") and not moving:
 		destination = position + jump_distance*Vector2.DOWN
 		if destination.y < screen_size.y:
 			jump_sound.play()

@@ -17,7 +17,7 @@ func _ready():
 	exit_button.focus_entered.connect(play_focus_sound)
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("pause"):
 		visible = !visible
 		get_tree().paused = visible
 		if visible:
