@@ -1,12 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://cn2l18ies7qxq"]
+[gd_scene load_steps=25 format=3 uid="uid://cn2l18ies7qxq"]
 
 [ext_resource type="Texture2D" uid="uid://baxctpfukdymd" path="res://Assets/Sprites/frog-Sheet.png" id="1_bch4g"]
 [ext_resource type="Script" path="res://Scripts/frog.gd" id="1_iaxpq"]
 [ext_resource type="AudioStream" uid="uid://dw430m6l1u3sr" path="res://Assets/Sounds/Frog (Croaking) - Sound Effect - ProSounds.wav" id="4_ds1gm"]
 [ext_resource type="AudioStream" uid="uid://cykyc3u5p5bom" path="res://Assets/Sounds/Coin 1.wav" id="4_kfys8"]
 [ext_resource type="AudioStream" uid="uid://bt76y2ati0gfp" path="res://Assets/Sounds/Enemy 2.wav" id="5_wi08x"]
+[ext_resource type="AudioStream" uid="uid://dxnosmjjf32m0" path="res://Assets/Sounds/Splash - Sound Effect (HD).wav" id="6_a7jn3"]
+[ext_resource type="AudioStream" uid="uid://bs6410rul4hxa" path="res://Assets/Sounds/Success 1.wav" id="7_0jb02"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy6j2"]
+height = 25.0
 
 [sub_resource type="Animation" id="Animation_kgue5"]
 length = 0.001
@@ -163,4 +166,14 @@ stream = ExtResource("4_kfys8")
 [node name="RestrictSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_wi08x")
 
+[node name="SplashSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("6_a7jn3")
+
+[node name="SuccessSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_0jb02")
+
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
+[connection signal="finished" from="SplashSound" to="." method="_on_splash_sound_finished"]
+[connection signal="finished" from="SuccessSound" to="." method="_on_success_sound_finished"]

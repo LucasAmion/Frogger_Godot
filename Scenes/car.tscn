@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf1vwkfmun7ns"]
+[gd_scene load_steps=6 format=3 uid="uid://bf1vwkfmun7ns"]
 
 [ext_resource type="Script" path="res://Scripts/car.gd" id="1_oc8e1"]
 [ext_resource type="Texture2D" uid="uid://q1egvqntwirs" path="res://Assets/Sprites/cars.png" id="2_1n26s"]
+[ext_resource type="AudioStream" uid="uid://dp6ec3sd328oh" path="res://Assets/Sounds/Hit 1.wav" id="3_4cfeq"]
+[ext_resource type="AudioStream" uid="uid://bska8yog2jrfy" path="res://Assets/Sounds/Game Over 1.wav" id="4_p2dve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_227p4"]
 size = Vector2(12, 26)
@@ -21,4 +23,14 @@ vframes = 3
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_227p4")
 
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_4cfeq")
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_p2dve")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="HitSound" to="." method="_on_hit_sound_finished"]
+[connection signal="finished" from="GameOverSound" to="." method="_on_game_over_sound_finished"]

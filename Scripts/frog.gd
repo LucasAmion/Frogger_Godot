@@ -4,9 +4,12 @@ extends CharacterBody2D
 @onready var state_machine = animation_tree["parameters/playback"]
 @onready var sprite_2d = $Sprite2D
 
+@onready var music = get_node("/root/Main/Music")
 @onready var frog_sound = $FrogSound
 @onready var jump_sound = $JumpSound
 @onready var restrict_sound = $RestrictSound
+@onready var splash_sound = $SplashSound
+@onready var success_sound = $SuccessSound
 
 @onready var speed = 180
 @onready var jump_distance = 45
@@ -64,7 +67,18 @@ func _physics_process(delta):
 		position = position.move_toward(destination, delta*speed)
 		if position == destination:
 			moving = false
+		if position.y <= -15:
+			music.stop()
+			get_tree().paused = true
+			splash_sound.play()
 
 func _on_animation_tree_animation_started(anim_name):
 	if anim_name == 'idle_1':
 		frog_sound.play()
+
+func _on_splash_sound_finished():
+	success_sound.play()
+
+func _on_success_sound_finished():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
