@@ -6,10 +6,10 @@ extends CharacterBody2D
 
 @onready var frog_sound = $FrogSound
 @onready var jump_sound = $JumpSound
-@onready var stop_sound = $StopSound
+@onready var restrict_sound = $RestrictSound
 
 @onready var speed = 180
-@onready var jump_distance = 60
+@onready var jump_distance = 45
 @onready var moving = false
 @onready var destination
 
@@ -25,40 +25,40 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_left") and not moving:
 		sprite_2d.scale = Vector2(1, 1)
 		destination = position + jump_distance*Vector2.LEFT
-		if destination.x >= 0:
+		if destination.x > 0:
 			jump_sound.play()
 			state_machine.start("jump")
 			moving = true
 		else:
-			stop_sound.play()
+			restrict_sound.play()
 	
 	if Input.is_action_just_pressed("ui_right") and not moving:
 		sprite_2d.scale = Vector2(-1, 1)
 		destination = position + jump_distance*Vector2.RIGHT
-		if destination.x <= screen_size.x:
+		if destination.x < screen_size.x:
 			jump_sound.play()
 			state_machine.start("jump")
 			moving = true
 		else:
-			stop_sound.play()
+			restrict_sound.play()
 	
 	if Input.is_action_just_pressed("ui_up") and not moving:
 		destination = position + jump_distance*Vector2.UP
-		if destination.y >= 0:
+		if destination.y > -30:
 			jump_sound.play()
 			state_machine.start("jump")
 			moving = true
 		else:
-			stop_sound.play()
+			restrict_sound.play()
 	
 	if Input.is_action_just_pressed("ui_down") and not moving:
 		destination = position + jump_distance*Vector2.DOWN
-		if destination.y <= screen_size.y:
+		if destination.y < screen_size.y:
 			jump_sound.play()
 			state_machine.start("jump")
 			moving = true
 		else:
-			stop_sound.play()
+			restrict_sound.play()
 	
 	if moving:
 		position = position.move_toward(destination, delta*speed)

@@ -10,7 +10,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	position += velocity*delta
-	position.x = wrapf(position.x, -26, screen_size.x+26)
+	position.x = wrapf(position.x, -30, screen_size.x+30)
 
 func _on_body_entered(body):
 	get_tree().reload_current_scene()
