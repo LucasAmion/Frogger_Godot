@@ -3,7 +3,7 @@ extends MarginContainer
 @onready var exit_button = %exit_button
 @onready var animation_player = $Sprite2D/AnimationPlayer
 
-@onready var focus_sound = $"../FocusSound"
+@onready var focus_sound = $"../../FocusSound"
 
 func _ready():
 	play_button.grab_focus()

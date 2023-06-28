@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="1_lmpjc"]
 [ext_resource type="TileSet" uid="uid://rlnrrfq1ysgs" path="res://Resources/menu_tile_set.tres" id="2_dmheb"]
 [ext_resource type="FontFile" uid="uid://mtifegiqx0ma" path="res://Assets/Fonts/Squares.ttf" id="3_vabvb"]
-[ext_resource type="StyleBox" path="res://Resources/button_normal.tres" id="4_temb7"]
-[ext_resource type="StyleBox" path="res://Resources/button_hover.tres" id="5_iy4hi"]
-[ext_resource type="StyleBox" path="res://Resources/button_pressed.tres" id="6_wcyv4"]
-[ext_resource type="StyleBox" path="res://Resources/button_focus.tres" id="7_h7t17"]
+[ext_resource type="StyleBox" uid="uid://ge2k6i63vpnv" path="res://Resources/button_normal.tres" id="4_temb7"]
+[ext_resource type="StyleBox" uid="uid://bq4wyvpt08m31" path="res://Resources/button_hover.tres" id="5_iy4hi"]
+[ext_resource type="StyleBox" uid="uid://cewl1pmyke28" path="res://Resources/button_pressed.tres" id="6_wcyv4"]
+[ext_resource type="StyleBox" uid="uid://db1w323vrpv8n" path="res://Resources/button_focus.tres" id="7_h7t17"]
 [ext_resource type="Texture2D" uid="uid://rgylrhergegn" path="res://Assets/RetroWindowsGUI/Windows_Button_Focus.png" id="8_awh66"]
 [ext_resource type="Texture2D" uid="uid://c4d8seiqbli0m" path="res://Assets/RetroWindowsGUI/Windows_Icons.png" id="10_r8dcp"]
 [ext_resource type="Texture2D" uid="uid://sc2qg73ygyrq" path="res://Assets/Sprites/restart.png" id="10_ty5tm"]
@@ -146,5 +146,6 @@ region_enabled = true
 region_rect = Rect2(49.7185, 2.47355, 11.9696, 10.8815)
 
 [node name="FocusSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("11_pc7y0")
 bus = &"Chorus"

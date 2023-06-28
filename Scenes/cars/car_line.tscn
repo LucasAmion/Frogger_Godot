@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://d21v637wmk3ti"]
 
-[ext_resource type="PackedScene" uid="uid://bf1vwkfmun7ns" path="res://Scenes/car.tscn" id="1_4rik1"]
-[ext_resource type="PackedScene" uid="uid://bmixolri1dkio" path="res://Scenes/car_2.tscn" id="2_fk05p"]
-[ext_resource type="PackedScene" uid="uid://dnohutis0gtlb" path="res://Scenes/car_3.tscn" id="3_ynsf3"]
+[ext_resource type="PackedScene" uid="uid://bf1vwkfmun7ns" path="res://Scenes/cars/car.tscn" id="1_4rik1"]
+[ext_resource type="PackedScene" uid="uid://bmixolri1dkio" path="res://Scenes/cars/car_2.tscn" id="2_fk05p"]
+[ext_resource type="PackedScene" uid="uid://dnohutis0gtlb" path="res://Scenes/cars/car_3.tscn" id="3_ynsf3"]
 
 [node name="CarLine" type="Node2D"]
 

@@ -4,8 +4,11 @@ extends Control
 @onready var restart_button = %restart_button
 @onready var exit_button = %exit_button
 
-@onready var music = $"../Music"
-@onready var focus_sound = $FocusSound
+@onready var music = $"../../Music"
+@onready var focus_sound = %FocusSound
+
+@onready var camera_2d = %Camera2D
+@onready var window = $".."
 
 
 func _ready():
@@ -18,9 +21,9 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
-		visible = !visible
-		get_tree().paused = visible
-		if visible:
+		window.visible = !window.visible
+		get_tree().paused = window.visible
+		if window.visible:
 			continue_button.grab_focus()
 			music.bus = 'Pause'
 		else:
@@ -29,7 +32,7 @@ func _process(delta):
 func _on_continue_pressed():
 	get_tree().paused = false
 	music.bus = 'Master'
-	hide()
+	window.hide()
 
 func _on_restart_pressed():
 	get_tree().reload_current_scene()
