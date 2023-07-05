@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8ix67r1np6"]
+[gd_scene load_steps=14 format=3 uid="uid://b8ix67r1np6"]
 
 [ext_resource type="PackedScene" uid="uid://cn2l18ies7qxq" path="res://Scenes/frog.tscn" id="1_anj3j"]
 [ext_resource type="TileSet" uid="uid://bfgwe34lyr7g3" path="res://Resources/city_tile_set.tres" id="1_ehuv1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://benimij3t5ke8" path="res://Scenes/pause_menu.tscn" id="7_r6jvf"]
 [ext_resource type="AudioStream" uid="uid://id3gw1k8sgen" path="res://Assets/Sounds/Power Up 1.wav" id="7_s8tpb"]
 [ext_resource type="Texture2D" uid="uid://cfni23efaamk6" path="res://Assets/Sprites/point-light.png" id="9_kaxy1"]
+[ext_resource type="PackedScene" uid="uid://5nu8m5jgp735" path="res://Scenes/bug.tscn" id="10_ib858"]
 
 [sub_resource type="Environment" id="Environment_or1hh"]
 background_mode = 3
@@ -22,6 +23,11 @@ adjustment_contrast = 1.25
 adjustment_saturation = 0.8
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8xubh"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dl2rf"]
+vertices = PackedVector2Array(387, -24, 389, 64, -240, 66, -240, -24)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(387, -24, 389, 64, -240, 66, -240, -24)])
 
 [node name="Main" type="Node2D"]
 metadata/_edit_vertical_guides_ = []
@@ -196,5 +202,12 @@ offset_left = -200.0
 offset_top = -72.0
 offset_right = 25.0
 offset_bottom = 243.0
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(241, 580)
+navigation_polygon = SubResource("NavigationPolygon_dl2rf")
+
+[node name="Bug" parent="." instance=ExtResource("10_ib858")]
+position = Vector2(241, 580)
 
 [editable path="Cars/CarLine1"]
