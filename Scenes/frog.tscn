@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cn2l18ies7qxq"]
+[gd_scene load_steps=24 format=3 uid="uid://cn2l18ies7qxq"]
 
 [ext_resource type="Texture2D" uid="uid://baxctpfukdymd" path="res://Assets/Sprites/frog-Sheet.png" id="1_bch4g"]
 [ext_resource type="Script" path="res://Scripts/frog.gd" id="1_iaxpq"]
@@ -128,8 +128,6 @@ states/jump/position = Vector2(721.333, 99.7723)
 transitions = ["Start", "idle_0", SubResource("AnimationNodeStateMachineTransition_d8osf"), "idle_0", "idle_1", SubResource("AnimationNodeStateMachineTransition_6w2kh"), "jump", "idle_0", SubResource("AnimationNodeStateMachineTransition_f4mih"), "idle_1", "idle_0", SubResource("AnimationNodeStateMachineTransition_hajd0"), "idle_0", "jump", SubResource("AnimationNodeStateMachineTransition_gubpq"), "idle_1", "jump", SubResource("AnimationNodeStateMachineTransition_dy6tw")]
 graph_offset = Vector2(-56.7317, 50.349)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_r8mwb"]
-
 [node name="Frog" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_iaxpq")
@@ -156,7 +154,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_gwfva")
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_r8mwb")
 
 [node name="FrogSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ds1gm")

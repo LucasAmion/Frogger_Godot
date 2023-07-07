@@ -1,8 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://5nu8m5jgp735"]
+[gd_scene load_steps=19 format=3 uid="uid://5nu8m5jgp735"]
 
 [ext_resource type="Script" path="res://Scripts/bug.gd" id="2_irjcr"]
 [ext_resource type="Texture2D" uid="uid://cklgjvtm2p04v" path="res://Assets/Sprites/bug_sprites.png" id="2_u4d3x"]
 [ext_resource type="Texture2D" uid="uid://cfni23efaamk6" path="res://Assets/Sprites/point-light.png" id="3_tslwu"]
+[ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/BTRoot.gd" id="4_aco2y"]
+[ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/Composite/BTSelector.gd" id="5_x7bth"]
+[ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/Composite/BTSequence.gd" id="6_b1625"]
+[ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/Leaves/BTConditionCallable.gd" id="7_b6ai6"]
+[ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/Leaves/BTActionCallable.gd" id="8_3lowb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tjh7g"]
 height = 25.0
@@ -83,9 +88,9 @@ states/sting/node = SubResource("AnimationNodeAnimation_6t0lb")
 states/sting/position = Vector2(577.333, 90)
 transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_5i787"), "sting", "move", SubResource("AnimationNodeStateMachineTransition_7ids8")]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_x3fss"]
-
 [node name="Bug" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("2_irjcr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -109,7 +114,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_5bdtn")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_x3fss")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
@@ -117,3 +121,34 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_x3fss")
 scale = Vector2(0.25, 0.25)
 color = Color(1, 1, 0.235294, 1)
 texture = ExtResource("3_tslwu")
+
+[node name="BTRoot" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
+script = ExtResource("4_aco2y")
+actor_path = NodePath("..")
+blackboard = NodePath("@Node@21626")
+
+[node name="BTSelector" type="Node" parent="BTRoot"]
+script = ExtResource("5_x7bth")
+
+[node name="BTSequence" type="Node" parent="BTRoot/BTSelector"]
+script = ExtResource("6_b1625")
+
+[node name="IsPlayerInRange" type="Node" parent="BTRoot/BTSelector/BTSequence"]
+script = ExtResource("7_b6ai6")
+method_owner_path = NodePath("../../../..")
+method_name = "is_player_in_range"
+
+[node name="MoveToPlayer" type="Node" parent="BTRoot/BTSelector/BTSequence"]
+script = ExtResource("8_3lowb")
+method_owner_path = NodePath("../../../..")
+method_name = "move_to_player"
+
+[node name="Sting" type="Node" parent="BTRoot/BTSelector/BTSequence"]
+script = ExtResource("8_3lowb")
+method_owner_path = NodePath("../../../..")
+method_name = "sting"
+
+[node name="MoveRandomly" type="Node" parent="BTRoot/BTSelector"]
+script = ExtResource("8_3lowb")
+method_owner_path = NodePath("../../..")
+method_name = "move_randomly"

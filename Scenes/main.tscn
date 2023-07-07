@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8ix67r1np6"]
+[gd_scene load_steps=15 format=3 uid="uid://b8ix67r1np6"]
 
 [ext_resource type="PackedScene" uid="uid://cn2l18ies7qxq" path="res://Scenes/frog.tscn" id="1_anj3j"]
 [ext_resource type="TileSet" uid="uid://bfgwe34lyr7g3" path="res://Resources/city_tile_set.tres" id="1_ehuv1"]
@@ -28,6 +28,9 @@ adjustment_saturation = 0.8
 vertices = PackedVector2Array(387, -24, 389, 64, -240, 66, -240, -24)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(387, -24, 389, 64, -240, 66, -240, -24)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shnh4"]
+size = Vector2(629, 88)
 
 [node name="Main" type="Node2D"]
 metadata/_edit_vertical_guides_ = []
@@ -163,6 +166,7 @@ position = Vector2(315, 615)
 [node name="Camera2D" type="Camera2D" parent="Frog"]
 unique_name_in_owner = true
 position = Vector2(0, -60)
+enabled = false
 zoom = Vector2(3, 3)
 limit_left = 0
 limit_top = 0
@@ -206,6 +210,12 @@ offset_bottom = 243.0
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(241, 580)
 navigation_polygon = SubResource("NavigationPolygon_dl2rf")
+
+[node name="Area2D" type="Area2D" parent="NavigationRegion2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Area2D"]
+position = Vector2(73.5, 20)
+shape = SubResource("RectangleShape2D_shnh4")
 
 [node name="Bug" parent="." instance=ExtResource("10_ib858")]
 position = Vector2(241, 580)
