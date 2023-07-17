@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree["parameters/playback"]
 @onready var sprite_2d = $Sprite2D
+@onready var stun_sprite = $StunSprite
 
 @onready var music = get_node("/root/Main/Music")
 @onready var frog_sound = $FrogSound
@@ -10,11 +11,14 @@ extends CharacterBody2D
 @onready var restrict_sound = $RestrictSound
 @onready var splash_sound = $SplashSound
 @onready var success_sound = $SuccessSound
+@onready var stun_sound = $StunSound
 
 @onready var speed = 180
 @onready var jump_distance = 45
 @onready var moving = false
 @onready var destination
+@onready var checkpoint
+@onready var stunned = false
 
 @onready var screen_size = get_viewport_rect().size
 
@@ -25,6 +29,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if stunned:
+		return
 	if Input.is_action_just_pressed("left") and not moving:
 		sprite_2d.scale = Vector2(1, 1)
 		destination = position + jump_distance*Vector2.LEFT
@@ -71,6 +77,28 @@ func _physics_process(delta):
 			music.stop()
 			get_tree().paused = true
 			splash_sound.play()
+
+func stun(by):
+	stun_sprite.show()
+	stun_sound.play()
+	moving = false
+	stunned = true
+	animation_tree.active = false
+	set_collision_layer_value(1, false)
+	var tween = create_tween()
+	tween.tween_property(self, "rotation", PI, 0.5)
+	if by == "car":
+		tween.parallel()
+		var new_position = Vector2(global_position.x, checkpoint)
+		tween.tween_property(self, "global_position", new_position, 0.5)
+	await stun_sound.finished
+	stun_sprite.hide()
+	stun_sound.stop()
+	stunned = false
+	animation_tree.active = true
+	set_collision_layer_value(1, true)
+	tween = create_tween()
+	tween.tween_property(self, "rotation", 0.0, 0.5)
 
 func _on_animation_tree_animation_started(anim_name):
 	if anim_name == 'idle_1':

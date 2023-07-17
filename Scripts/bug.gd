@@ -9,6 +9,7 @@ var movement_speed: float = 50
 @onready var sprite_2d = $Sprite2D
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree["parameters/playback"]
+@onready var sting_sound = $StingSound
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,6 +31,9 @@ func actor_setup():
 
 func is_player_in_range():
 	return area_2d.overlaps_body(frog)
+
+func is_player_stunned():
+	return frog.stunned
 
 func move_to_player():
 	has_target == false
@@ -56,6 +60,8 @@ func move_to_player():
 
 func sting():
 	state_machine.travel("sting")
+	sting_sound.play()
+	frog.stun("bug")
 	return  BTTickResult.SUCCESS
 
 func move_randomly():
@@ -82,22 +88,3 @@ func move_randomly():
 		sprite_2d.scale = Vector2(-1, 1)
 	move_and_slide()
 	return  BTTickResult.RUNNING
-
-
-#func _physics_process(delta):
-#	navigation_agent.target_position = frog.global_position
-#
-#	var current_agent_position: Vector2 = global_position
-#	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
-#
-#	var new_velocity: Vector2 = next_path_position - current_agent_position
-#	new_velocity = new_velocity.normalized()
-#	new_velocity = new_velocity * movement_speed
-#
-#	navigation_agent.set_velocity(new_velocity) 
-#	velocity = new_velocity
-#	if velocity.x < 0:
-#		sprite_2d.scale = Vector2(1, 1)
-#	elif velocity.x > 0:
-#		sprite_2d.scale = Vector2(-1, 1)
-#	move_and_slide()

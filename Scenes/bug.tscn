@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://5nu8m5jgp735"]
+[gd_scene load_steps=21 format=3 uid="uid://5nu8m5jgp735"]
 
 [ext_resource type="Script" path="res://Scripts/bug.gd" id="2_irjcr"]
 [ext_resource type="Texture2D" uid="uid://cklgjvtm2p04v" path="res://Assets/Sprites/bug_sprites.png" id="2_u4d3x"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/Composite/BTSequence.gd" id="6_b1625"]
 [ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/Leaves/BTConditionCallable.gd" id="7_b6ai6"]
 [ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/Leaves/BTActionCallable.gd" id="8_3lowb"]
+[ext_resource type="Script" path="res://addons/yet_another_behavior_tree/src/Nodes/Decorators/BTInverter.gd" id="8_dj7ft"]
+[ext_resource type="AudioStream" uid="uid://cc7mxk0jqorlj" path="res://Assets/Sounds/Hit 2.wav" id="10_742jv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tjh7g"]
 height = 25.0
@@ -113,7 +115,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_5bdtn")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
@@ -138,6 +139,14 @@ script = ExtResource("7_b6ai6")
 method_owner_path = NodePath("../../../..")
 method_name = "is_player_in_range"
 
+[node name="NotStunned" type="Node" parent="BTRoot/BTSelector/BTSequence"]
+script = ExtResource("8_dj7ft")
+
+[node name="IsPlayerStunned" type="Node" parent="BTRoot/BTSelector/BTSequence/NotStunned"]
+script = ExtResource("7_b6ai6")
+method_owner_path = NodePath("../../../../..")
+method_name = "is_player_stunned"
+
 [node name="MoveToPlayer" type="Node" parent="BTRoot/BTSelector/BTSequence"]
 script = ExtResource("8_3lowb")
 method_owner_path = NodePath("../../../..")
@@ -152,3 +161,6 @@ method_name = "sting"
 script = ExtResource("8_3lowb")
 method_owner_path = NodePath("../../..")
 method_name = "move_randomly"
+
+[node name="StingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_742jv")

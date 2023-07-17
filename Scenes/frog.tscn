@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cn2l18ies7qxq"]
+[gd_scene load_steps=35 format=3 uid="uid://cn2l18ies7qxq"]
 
 [ext_resource type="Texture2D" uid="uid://baxctpfukdymd" path="res://Assets/Sprites/frog-Sheet.png" id="1_bch4g"]
 [ext_resource type="Script" path="res://Scripts/frog.gd" id="1_iaxpq"]
@@ -7,6 +7,16 @@
 [ext_resource type="AudioStream" uid="uid://bt76y2ati0gfp" path="res://Assets/Sounds/Enemy 2.wav" id="5_wi08x"]
 [ext_resource type="AudioStream" uid="uid://dxnosmjjf32m0" path="res://Assets/Sounds/Splash - Sound Effect (HD).wav" id="6_a7jn3"]
 [ext_resource type="AudioStream" uid="uid://bs6410rul4hxa" path="res://Assets/Sounds/Success 1.wav" id="7_0jb02"]
+[ext_resource type="Texture2D" uid="uid://c2t3735k05tlh" path="res://Assets/Sprites/stun/stun-0.png" id="8_umqas"]
+[ext_resource type="Texture2D" uid="uid://l55egan6ngs8" path="res://Assets/Sprites/stun/stun-1.png" id="9_chj2p"]
+[ext_resource type="Texture2D" uid="uid://d1tx5aatj0pfe" path="res://Assets/Sprites/stun/stun-2.png" id="10_caqq4"]
+[ext_resource type="Texture2D" uid="uid://diov8wjvno5sn" path="res://Assets/Sprites/stun/stun-3.png" id="11_stilt"]
+[ext_resource type="Texture2D" uid="uid://b8dwrbpbw2yao" path="res://Assets/Sprites/stun/stun-4.png" id="12_e37ds"]
+[ext_resource type="Texture2D" uid="uid://e283y5svshuo" path="res://Assets/Sprites/stun/stun-5.png" id="13_btxac"]
+[ext_resource type="Texture2D" uid="uid://ysameeyajejo" path="res://Assets/Sprites/stun/stun-6.png" id="14_rv7v5"]
+[ext_resource type="Texture2D" uid="uid://x8ku7o2k7vqp" path="res://Assets/Sprites/stun/stun-7.png" id="15_dvldv"]
+[ext_resource type="Texture2D" uid="uid://cf8oxmtk587jm" path="res://Assets/Sprites/stun/stun-8.png" id="16_r7qa3"]
+[ext_resource type="AudioStream" uid="uid://c6gju6y43ugf6" path="res://Assets/Sounds/Cartoon-Dizzybirds-Sound-Effect.mp3" id="17_lvkw0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy6j2"]
 height = 25.0
@@ -128,6 +138,41 @@ states/jump/position = Vector2(721.333, 99.7723)
 transitions = ["Start", "idle_0", SubResource("AnimationNodeStateMachineTransition_d8osf"), "idle_0", "idle_1", SubResource("AnimationNodeStateMachineTransition_6w2kh"), "jump", "idle_0", SubResource("AnimationNodeStateMachineTransition_f4mih"), "idle_1", "idle_0", SubResource("AnimationNodeStateMachineTransition_hajd0"), "idle_0", "jump", SubResource("AnimationNodeStateMachineTransition_gubpq"), "idle_1", "jump", SubResource("AnimationNodeStateMachineTransition_dy6tw")]
 graph_offset = Vector2(-56.7317, 50.349)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_85o4q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_umqas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_chj2p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_caqq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_stilt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_e37ds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_btxac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rv7v5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_dvldv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_r7qa3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Frog" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_iaxpq")
@@ -173,6 +218,18 @@ stream = ExtResource("6_a7jn3")
 process_mode = 3
 stream = ExtResource("7_0jb02")
 bus = &"Chorus"
+
+[node name="StunSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, 10)
+rotation = 3.14159
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_85o4q")
+autoplay = "default"
+frame_progress = 0.236374
+
+[node name="StunSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_lvkw0")
 
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
 [connection signal="finished" from="SplashSound" to="." method="_on_splash_sound_finished"]
