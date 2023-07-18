@@ -147,6 +147,14 @@ script = ExtResource("7_b6ai6")
 method_owner_path = NodePath("../../../../..")
 method_name = "is_player_stunned"
 
+[node name="ShieldNotUp" type="Node" parent="BTRoot/BTSelector/BTSequence"]
+script = ExtResource("8_dj7ft")
+
+[node name="IsShieldUp" type="Node" parent="BTRoot/BTSelector/BTSequence/ShieldNotUp"]
+script = ExtResource("7_b6ai6")
+method_owner_path = NodePath("../../../../..")
+method_name = "is_shield_up"
+
 [node name="MoveToPlayer" type="Node" parent="BTRoot/BTSelector/BTSequence"]
 script = ExtResource("8_3lowb")
 method_owner_path = NodePath("../../../..")

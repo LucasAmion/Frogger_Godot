@@ -25,8 +25,9 @@ func _physics_process(delta):
 #	get_tree().paused = true
 
 func _on_body_entered(body):
-	hit_sound.play()
-	frog.stun("car")
+	if not frog.shield_up:
+		hit_sound.play()
+		frog.stun("car")
 
 #func _on_hit_sound_finished():
 #	game_over_sound.play()

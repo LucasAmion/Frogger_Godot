@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8ix67r1np6"]
+[gd_scene load_steps=18 format=3 uid="uid://b8ix67r1np6"]
 
 [ext_resource type="PackedScene" uid="uid://cn2l18ies7qxq" path="res://Scenes/frog.tscn" id="1_anj3j"]
 [ext_resource type="TileSet" uid="uid://bfgwe34lyr7g3" path="res://Resources/city_tile_set.tres" id="1_ehuv1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cfni23efaamk6" path="res://Assets/Sprites/point-light.png" id="9_kaxy1"]
 [ext_resource type="PackedScene" uid="uid://5nu8m5jgp735" path="res://Scenes/bug.tscn" id="10_ib858"]
 [ext_resource type="PackedScene" uid="uid://c03abxejtxs06" path="res://Scenes/check_point.tscn" id="11_6bge6"]
+[ext_resource type="PackedScene" uid="uid://um0ox8ca63d3" path="res://Scenes/bug_2.tscn" id="12_q3xht"]
 
 [sub_resource type="Environment" id="Environment_or1hh"]
 background_mode = 3
@@ -32,6 +33,11 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(387, -24, 389, 64, -240
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shnh4"]
 size = Vector2(629, 88)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1is27"]
+vertices = PackedVector2Array(389, -100, 391, 65, -240, 61, -240, -102)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-240, -102, -240, 61, 391, 65, 389, -100)])
 
 [node name="Main" type="Node2D"]
 metadata/_edit_vertical_guides_ = []
@@ -208,7 +214,6 @@ offset_right = 25.0
 offset_bottom = 243.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 position = Vector2(241, 580)
 navigation_polygon = SubResource("NavigationPolygon_dl2rf")
 
@@ -218,8 +223,21 @@ navigation_polygon = SubResource("NavigationPolygon_dl2rf")
 position = Vector2(73.5, 20)
 shape = SubResource("RectangleShape2D_shnh4")
 
+[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="."]
+position = Vector2(240, 386)
+navigation_polygon = SubResource("NavigationPolygon_1is27")
+
+[node name="Area2D" type="Area2D" parent="NavigationRegion2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D2/Area2D"]
+position = Vector2(73.5, 20)
+shape = SubResource("RectangleShape2D_shnh4")
+
 [node name="Bug" parent="." instance=ExtResource("10_ib858")]
 position = Vector2(241, 580)
+
+[node name="Bug2" parent="." instance=ExtResource("12_q3xht")]
+position = Vector2(351, 387)
 
 [node name="CheckPoint" parent="." instance=ExtResource("11_6bge6")]
 position = Vector2(315, 578)

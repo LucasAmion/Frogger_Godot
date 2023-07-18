@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var state_machine = animation_tree["parameters/playback"]
 @onready var sprite_2d = $Sprite2D
 @onready var stun_sprite = $StunSprite
+@onready var shield_sprite = $ShieldSprite
 
 @onready var music = get_node("/root/Main/Music")
 @onready var frog_sound = $FrogSound
@@ -12,6 +13,7 @@ extends CharacterBody2D
 @onready var splash_sound = $SplashSound
 @onready var success_sound = $SuccessSound
 @onready var stun_sound = $StunSound
+@onready var swallow_sound = $SwallowSound
 
 @onready var speed = 180
 @onready var jump_distance = 45
@@ -19,6 +21,7 @@ extends CharacterBody2D
 @onready var destination
 @onready var checkpoint
 @onready var stunned = false
+@onready var shield_up = false
 
 @onready var screen_size = get_viewport_rect().size
 
@@ -99,6 +102,18 @@ func stun(by):
 	set_collision_layer_value(1, true)
 	tween = create_tween()
 	tween.tween_property(self, "rotation", 0.0, 0.5)
+
+func activate_shield():
+	shield_up = true
+	swallow_sound.play()
+	var tween = create_tween()
+	tween.tween_method(set_shader_value, 0.0, 1.0, 0.5);
+	tween.tween_method(set_shader_value, 1.0, 0.0, 5.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE);
+	await tween.finished
+	shield_up = false
+
+func set_shader_value(value: float):
+	shield_sprite.material.set_shader_parameter("FloatParameter", value);
 
 func _on_animation_tree_animation_started(anim_name):
 	if anim_name == 'idle_1':

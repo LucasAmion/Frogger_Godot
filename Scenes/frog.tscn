@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cn2l18ies7qxq"]
+[gd_scene load_steps=39 format=3 uid="uid://cn2l18ies7qxq"]
 
 [ext_resource type="Texture2D" uid="uid://baxctpfukdymd" path="res://Assets/Sprites/frog-Sheet.png" id="1_bch4g"]
 [ext_resource type="Script" path="res://Scripts/frog.gd" id="1_iaxpq"]
@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://x8ku7o2k7vqp" path="res://Assets/Sprites/stun/stun-7.png" id="15_dvldv"]
 [ext_resource type="Texture2D" uid="uid://cf8oxmtk587jm" path="res://Assets/Sprites/stun/stun-8.png" id="16_r7qa3"]
 [ext_resource type="AudioStream" uid="uid://c6gju6y43ugf6" path="res://Assets/Sounds/Cartoon-Dizzybirds-Sound-Effect.mp3" id="17_lvkw0"]
+[ext_resource type="Shader" uid="uid://xb0n3v3eom2g" path="res://Resources/shield_shader.tres" id="18_65ra3"]
+[ext_resource type="Texture2D" uid="uid://dag8jeo5ou82g" path="res://Assets/Sprites/spr_shield.png" id="19_ejqw8"]
+[ext_resource type="AudioStream" uid="uid://lk8kypcolps2" path="res://Assets/Sounds/gulp.mp3" id="20_mc0e2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy6j2"]
 height = 25.0
@@ -173,6 +176,11 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7fqga"]
+shader = ExtResource("18_65ra3")
+shader_parameter/ColorParameter = Color(0, 1, 0, 1)
+shader_parameter/FloatParameter = 0.0
+
 [node name="Frog" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_iaxpq")
@@ -230,6 +238,19 @@ frame_progress = 0.236374
 
 [node name="StunSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_lvkw0")
+
+[node name="ShieldSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_7fqga")
+position = Vector2(1, -2)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("19_ejqw8")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 50.0
+
+[node name="SwallowSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_mc0e2")
+volume_db = 10.0
 
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
 [connection signal="finished" from="SplashSound" to="." method="_on_splash_sound_finished"]
