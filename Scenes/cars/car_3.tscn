@@ -48,6 +48,10 @@ energy = 1.5
 texture = ExtResource("5_x7nk1")
 texture_scale = 0.05
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 40.0
+avoidance_layers = 2
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="finished" from="HitSound" to="." method="_on_hit_sound_finished"]
 [connection signal="finished" from="GameOverSound" to="." method="_on_game_over_sound_finished"]

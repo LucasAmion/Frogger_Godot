@@ -126,7 +126,7 @@ texture = ExtResource("3_tslwu")
 [node name="BTRoot" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
 script = ExtResource("4_aco2y")
 actor_path = NodePath("..")
-blackboard = NodePath("@Node@21626")
+blackboard = NodePath("@Node@21210")
 
 [node name="BTSelector" type="Node" parent="BTRoot"]
 script = ExtResource("5_x7bth")

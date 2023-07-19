@@ -13,7 +13,6 @@ var movement_speed: float = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
 	navigation_agent.path_desired_distance = 5.0
 	navigation_agent.target_desired_distance = 5.0
 	

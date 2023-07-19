@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var sprite_2d = $Sprite2D
 @onready var stun_sprite = $StunSprite
 @onready var shield_sprite = $ShieldSprite
+@onready var point_light_2d = $PointLight2D
 
 @onready var music = get_node("/root/Main/Music")
 @onready var frog_sound = $FrogSound
@@ -27,6 +28,7 @@ extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_tree().paused = false
 	animation_tree.active = true
 	state_machine.start("idle_0")
 
@@ -108,7 +110,9 @@ func activate_shield():
 	swallow_sound.play()
 	var tween = create_tween()
 	tween.tween_method(set_shader_value, 0.0, 1.0, 0.5);
+	tween.parallel().tween_property(point_light_2d, "color", Color.WHITE, 0.5)
 	tween.tween_method(set_shader_value, 1.0, 0.0, 5.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE);
+	tween.parallel().tween_property(point_light_2d, "color", Color.TRANSPARENT, 5.0).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE);
 	await tween.finished
 	shield_up = false
 

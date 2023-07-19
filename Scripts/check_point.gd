@@ -1,6 +1,5 @@
 extends Area2D
 
-@onready var frog = $"../Frog"
 @export var y_position: int
 
 # Called when the node enters the scene tree for the first time.
@@ -14,5 +13,5 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if body == frog:
-		frog.checkpoint = y_position
+	if body.is_in_group("frogs"):
+		body.checkpoint = y_position

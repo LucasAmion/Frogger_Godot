@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b8ix67r1np6"]
+[gd_scene load_steps=22 format=3 uid="uid://b8ix67r1np6"]
 
 [ext_resource type="PackedScene" uid="uid://cn2l18ies7qxq" path="res://Scenes/frog.tscn" id="1_anj3j"]
 [ext_resource type="TileSet" uid="uid://bfgwe34lyr7g3" path="res://Resources/city_tile_set.tres" id="1_ehuv1"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://5nu8m5jgp735" path="res://Scenes/bug.tscn" id="10_ib858"]
 [ext_resource type="PackedScene" uid="uid://c03abxejtxs06" path="res://Scenes/check_point.tscn" id="11_6bge6"]
 [ext_resource type="PackedScene" uid="uid://um0ox8ca63d3" path="res://Scenes/bug_2.tscn" id="12_q3xht"]
+[ext_resource type="PackedScene" uid="uid://pywvu2cvsbjs" path="res://Scenes/blue_frog.tscn" id="13_u80tl"]
+[ext_resource type="PackedScene" uid="uid://d316nv3wcv5qj" path="res://Scenes/orange_frog.tscn" id="14_7lm5k"]
 
 [sub_resource type="Environment" id="Environment_or1hh"]
 background_mode = 3
@@ -32,12 +34,20 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(387, -24, 389, 64, -240, 66, -240, -24)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shnh4"]
-size = Vector2(629, 88)
+size = Vector2(629, 87)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1is27"]
 vertices = PackedVector2Array(389, -100, 391, 65, -240, 61, -240, -102)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-240, -102, -240, 61, 391, 65, 389, -100)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ti4hy"]
+size = Vector2(630, 165)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jbthi"]
+vertices = PackedVector2Array(-240, -456, 392, -457, 389, 258, -240, 257)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-240, -456, 392, -457, 389, 258, -240, 257)])
 
 [node name="Main" type="Node2D"]
 metadata/_edit_vertical_guides_ = []
@@ -68,6 +78,34 @@ color = Color(0.313726, 0.313726, 0.313726, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_or1hh")
 camera_attributes = SubResource("CameraAttributesPractical_8xubh")
+
+[node name="Bug" parent="." instance=ExtResource("10_ib858")]
+position = Vector2(241, 580)
+
+[node name="Bug2" parent="." instance=ExtResource("12_q3xht")]
+position = Vector2(351, 387)
+
+[node name="Frog" parent="." groups=["frogs"] instance=ExtResource("1_anj3j")]
+position = Vector2(315, 615)
+
+[node name="Camera2D" type="Camera2D" parent="Frog"]
+unique_name_in_owner = true
+position = Vector2(0, -60)
+zoom = Vector2(3, 3)
+limit_left = 0
+limit_top = 0
+limit_right = 630
+limit_bottom = 645
+limit_smoothed = true
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_top_margin = 0.3
+drag_right_margin = 0.3
+drag_bottom_margin = 0.3
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="Lights" type="Node2D" parent="."]
 
@@ -167,27 +205,11 @@ position = Vector2(0, 480)
 position = Vector2(630, 525)
 rotation = 3.14159
 
-[node name="Frog" parent="." instance=ExtResource("1_anj3j")]
-position = Vector2(315, 615)
+[node name="Frog2" parent="." groups=["frogs"] instance=ExtResource("13_u80tl")]
+position = Vector2(45, 615)
 
-[node name="Camera2D" type="Camera2D" parent="Frog"]
-unique_name_in_owner = true
-position = Vector2(0, -60)
-zoom = Vector2(3, 3)
-limit_left = 0
-limit_top = 0
-limit_right = 630
-limit_bottom = 645
-limit_smoothed = true
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.3
-drag_top_margin = 0.3
-drag_right_margin = 0.3
-drag_bottom_margin = 0.3
-editor_draw_limits = true
-editor_draw_drag_margin = true
+[node name="Frog3" parent="." groups=["frogs"] instance=ExtResource("14_7lm5k")]
+position = Vector2(585, 615)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -214,6 +236,7 @@ offset_right = 25.0
 offset_bottom = 243.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 position = Vector2(241, 580)
 navigation_polygon = SubResource("NavigationPolygon_dl2rf")
 
@@ -224,25 +247,26 @@ position = Vector2(73.5, 20)
 shape = SubResource("RectangleShape2D_shnh4")
 
 [node name="NavigationRegion2D2" type="NavigationRegion2D" parent="."]
+visible = false
 position = Vector2(240, 386)
 navigation_polygon = SubResource("NavigationPolygon_1is27")
 
 [node name="Area2D" type="Area2D" parent="NavigationRegion2D2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D2/Area2D"]
-position = Vector2(73.5, 20)
-shape = SubResource("RectangleShape2D_shnh4")
+position = Vector2(76, -17.5)
+shape = SubResource("RectangleShape2D_ti4hy")
 
-[node name="Bug" parent="." instance=ExtResource("10_ib858")]
-position = Vector2(241, 580)
+[node name="NavigationRegion2D3" type="NavigationRegion2D" parent="."]
+visible = false
+position = Vector2(240, 386)
+navigation_polygon = SubResource("NavigationPolygon_jbthi")
+navigation_layers = 2
 
-[node name="Bug2" parent="." instance=ExtResource("12_q3xht")]
-position = Vector2(351, 387)
-
-[node name="CheckPoint" parent="." instance=ExtResource("11_6bge6")]
+[node name="CheckPoint" parent="." groups=["checkpoints"] instance=ExtResource("11_6bge6")]
 position = Vector2(315, 578)
 
-[node name="CheckPoint2" parent="." instance=ExtResource("11_6bge6")]
+[node name="CheckPoint2" parent="." groups=["checkpoints"] instance=ExtResource("11_6bge6")]
 position = Vector2(315, 307)
 y_position = 300
 
