@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://pywvu2cvsbjs"]
+[gd_scene load_steps=51 format=3 uid="uid://pywvu2cvsbjs"]
 
 [ext_resource type="Script" path="res://Scripts/ai_frog.gd" id="1_y1pgt"]
 [ext_resource type="Texture2D" uid="uid://3d8gv3cqse8l" path="res://Assets/Sprites/frog-Sheet-3.png" id="2_7caqs"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bt76y2ati0gfp" path="res://Assets/Sounds/Enemy 2.wav" id="5_5t1es"]
 [ext_resource type="AudioStream" uid="uid://dxnosmjjf32m0" path="res://Assets/Sounds/Splash - Sound Effect (HD).wav" id="6_6y2mi"]
 [ext_resource type="AudioStream" uid="uid://bs6410rul4hxa" path="res://Assets/Sounds/Success 1.wav" id="7_goi7d"]
+[ext_resource type="Texture2D" uid="uid://cuf2mwpw4fyv7" path="res://Assets/Sprites/star.png" id="8_brqd5"]
 [ext_resource type="Texture2D" uid="uid://c2t3735k05tlh" path="res://Assets/Sprites/stun/stun-0.png" id="8_ode34"]
 [ext_resource type="Texture2D" uid="uid://l55egan6ngs8" path="res://Assets/Sprites/stun/stun-1.png" id="9_y6i2g"]
 [ext_resource type="Texture2D" uid="uid://d1tx5aatj0pfe" path="res://Assets/Sprites/stun/stun-2.png" id="10_1pdfn"]
@@ -238,6 +239,20 @@ process_mode = 3
 stream = ExtResource("7_goi7d")
 bus = &"Chorus"
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.7
+texture = ExtResource("8_brqd5")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+
 [node name="StunSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(0, 10)
@@ -280,7 +295,7 @@ radius = 50.0
 [node name="BTRoot" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
 script = ExtResource("21_mqfps")
 actor_path = NodePath("..")
-blackboard = NodePath("@Node@66085")
+blackboard = NodePath("@Node@75965")
 
 [node name="BTSequence" type="Node" parent="BTRoot"]
 script = ExtResource("23_maool")

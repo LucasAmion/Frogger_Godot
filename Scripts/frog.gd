@@ -15,6 +15,7 @@ extends CharacterBody2D
 @onready var success_sound = $SuccessSound
 @onready var stun_sound = $StunSound
 @onready var swallow_sound = $SwallowSound
+@onready var cpu_particles_2d = $CPUParticles2D
 
 @onready var speed = 180
 @onready var jump_distance = 45
@@ -84,6 +85,7 @@ func _physics_process(delta):
 			splash_sound.play()
 
 func stun(by):
+	cpu_particles_2d.emitting = true
 	stun_sprite.show()
 	stun_sound.play()
 	moving = false

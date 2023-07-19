@@ -18,6 +18,7 @@ extends CharacterBody2D
 @onready var window = $Window
 @onready var loss_menu = $Window/LossMenu
 @onready var point_light_2d = $PointLight2D
+@onready var cpu_particles_2d = $CPUParticles2D
 
 @onready var speed = 150
 @onready var navigation_agent = $NavigationAgent2D
@@ -156,6 +157,7 @@ func _on_velocity_computed(safe_velocity):
 		position.x = 585
 
 func stun(by):
+	cpu_particles_2d.emitting = true
 	speed = 150
 	stun_sprite.show()
 	stun_sound.play()

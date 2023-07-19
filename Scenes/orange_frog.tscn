@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://d316nv3wcv5qj"]
+[gd_scene load_steps=51 format=3 uid="uid://d316nv3wcv5qj"]
 
 [ext_resource type="Script" path="res://Scripts/ai_frog.gd" id="1_dkpeq"]
 [ext_resource type="Texture2D" uid="uid://cmokld631y63s" path="res://Assets/Sprites/frog-Sheet-2.png" id="2_m81u2"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dxnosmjjf32m0" path="res://Assets/Sounds/Splash - Sound Effect (HD).wav" id="6_8vpes"]
 [ext_resource type="AudioStream" uid="uid://bs6410rul4hxa" path="res://Assets/Sounds/Success 1.wav" id="7_l18ue"]
 [ext_resource type="Texture2D" uid="uid://c2t3735k05tlh" path="res://Assets/Sprites/stun/stun-0.png" id="8_rxpwp"]
+[ext_resource type="Texture2D" uid="uid://cuf2mwpw4fyv7" path="res://Assets/Sprites/star.png" id="8_xy3h2"]
 [ext_resource type="Texture2D" uid="uid://l55egan6ngs8" path="res://Assets/Sprites/stun/stun-1.png" id="9_np5m0"]
 [ext_resource type="Texture2D" uid="uid://d1tx5aatj0pfe" path="res://Assets/Sprites/stun/stun-2.png" id="10_b2a1j"]
 [ext_resource type="Texture2D" uid="uid://diov8wjvno5sn" path="res://Assets/Sprites/stun/stun-3.png" id="11_wdyth"]
@@ -238,6 +239,20 @@ process_mode = 3
 stream = ExtResource("7_l18ue")
 bus = &"Chorus"
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.7
+texture = ExtResource("8_xy3h2")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+
 [node name="StunSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(0, 10)
@@ -280,7 +295,7 @@ radius = 50.0
 [node name="BTRoot" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
 script = ExtResource("21_0iybw")
 actor_path = NodePath("..")
-blackboard = NodePath("@Node@71145")
+blackboard = NodePath("@Node@70042")
 
 [node name="BTSequence" type="Node" parent="BTRoot"]
 script = ExtResource("23_5x10x")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b8ix67r1np6"]
+[gd_scene load_steps=22 format=3 uid="uid://dnivgmlv2cm2q"]
 
 [ext_resource type="PackedScene" uid="uid://cn2l18ies7qxq" path="res://Scenes/frog.tscn" id="1_anj3j"]
 [ext_resource type="TileSet" uid="uid://bfgwe34lyr7g3" path="res://Resources/city_tile_set.tres" id="1_ehuv1"]
